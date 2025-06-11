@@ -277,7 +277,9 @@ io.on('connection', (socket) => {
     } else {
       socket.emit('join-error', { message: 'Senha inválida!' });
     }
-/ Iniciar rodada (apenas admin)
+  });
+
+  // Iniciar rodada (apenas admin)
   socket.on('start-round', () => {
     const playerData = gameState.players.get(socket.id);
     if (!playerData) return;
@@ -385,11 +387,11 @@ io.on('connection', (socket) => {
     }
     
     gameState.players.delete(socket.id);
-    gameState.admins.delete(socket.id);
+
   });
 });
 
-PI endpoints
+// API endpoints
 app.get('/api/game-data', (req, res) => {
   res.json({
     situacoes,
